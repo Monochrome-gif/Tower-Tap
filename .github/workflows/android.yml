@@ -1,5 +1,4 @@
 
-
 name: Build TowerTap APK
 
 on:
@@ -24,12 +23,20 @@ jobs:
       - name: Set up Android SDK
         shell: bash
         run: |
+          set -e
+
           SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -type f -name sdkmanager | sort -V | tail -n 1)
+
+          if [ -z "$SDKMANAGER" ]; then
+            echo "ERROR: Android SDK Manager not found"
+            exit 1
+          fi
+
           echo "Using SDK Manager: $SDKMANAGER"
 
-          yes | "$SDKMANAGER" --licenses
+          "$SDKMANAGER" --licenses < <(yes)
 
-          "$SDKMANAGER" \
+          "$SDKMANAGER" --install \
             "platform-tools" \
             "platforms;android-35" \
             "build-tools;35.0.0"
