@@ -1,0 +1,6 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TowerTap</string>
+    <string name="accessibility_description">TowerTap uses accessibility gestures to perform taps when you start it manually.</string>
+</resources>
